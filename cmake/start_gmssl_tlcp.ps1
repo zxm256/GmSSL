@@ -7,7 +7,7 @@ param (
 
 # 启动进程并获取进程对象
 $process = Start-Process -FilePath $gmsslPath `
-                         #-ArgumentList $arguments `
+                         -ArgumentList $arguments `
                          -NoNewWindow `
                          -RedirectStandardOutput $logFile `
                          -PassThru
