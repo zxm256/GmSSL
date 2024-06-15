@@ -15,7 +15,7 @@ $process = Start-Process -FilePath "$gmsslPath" `
                          -ArgumentList $arguments `
                          -NoNewWindow `
                          -RedirectStandardOutput $logFile `
-                         -PassThru#
+                         -PassThru
 
 Start-Sleep -Seconds 5  # 等待几秒钟以便服务器启动
 
