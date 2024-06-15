@@ -5,7 +5,7 @@ $process = Start-Process -FilePath "bin/gmssl.exe" `
                          -PassThru
 
 # 等待进程完成或超时
-$timeout = 10  # 设置超时时间，单位为秒
+$timeout = 2  # 设置超时时间，单位为秒
 $waitResult = $process.WaitForExit($timeout * 1000)  # 将超时时间转换为毫秒
 
 if (!$waitResult) {
