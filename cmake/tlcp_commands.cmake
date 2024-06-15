@@ -20,7 +20,7 @@ if(WIN32)
 		message(FATAL_ERROR "gmssl.exe file does not exist")
 	endif()
 	execute_process(
-	    COMMAND powershell -ExecutionPolicy Bypass -File start_gmssl_tlcp.ps1
+	    COMMAND powershell -ExecutionPolicy Bypass -File "${CMAKE_SOURCE_DIR}/cmake/start_gmssl_tlcp.ps1"
 	    RESULT_VARIABLE SERVER_RESULT
 	    TIMEOUT 10
 	)
