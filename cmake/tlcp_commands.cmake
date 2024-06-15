@@ -47,7 +47,7 @@ execute_process(COMMAND ${CMAKE_COMMAND} -E sleep 2)
 if (WIN32)
 	message(STATUS "Client start!!!!!!!!!!!")
 	execute_process(
-		COMMAND cmd /c "start /B bin\\gmssl tlcp_client -host localhost -port 4433 -cacert rootcacert.pem > tlcp_client.log 2>&1"
+		 COMMAND powershell -ExecutionPolicy Bypass -File "../cmake/start_gmssl_tlcp_client.ps1"
 		RESULT_VARIABLE CLIENT_RESULT
 		TIMEOUT 5
 	)
