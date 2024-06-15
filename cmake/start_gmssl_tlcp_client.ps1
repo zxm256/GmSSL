@@ -6,9 +6,9 @@ param (
 
 # 启动进程并获取进程对象
 $process = Start-Process -FilePath $gmsslPath `
-                         -ArgumentList $arguments `
+                        # -ArgumentList $arguments `
                          -NoNewWindow `
-                         #-RedirectStandardOutput $logFile `
+                         -RedirectStandardOutput $logFile `
                          -PassThru
 
 Start-Sleep -Seconds 5  # 等待几秒钟以便服务器启动
