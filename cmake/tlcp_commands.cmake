@@ -18,7 +18,7 @@ if(WIN32)
 	message("PowerShell command: start /b powershell -ExecutionPolicy Bypass -File \"../cmake/start_gmssl_tlcp.ps1\"")
 
 	execute_process(
-		COMMAND start /b powershell -ExecutionPolicy Bypass -File "..\\cmake\\start_gmssl_tlcp.ps1"    
+		COMMAND start /b powershell -ExecutionPolicy Bypass -File "${CMAKE_SOURCE_DIR}\\..\\cmake\\start_gmssl_tlcp.ps1"    
 		RESULT_VARIABLE SERVER_RESULT
 		ERROR_VARIABLE SERVER_ERROR  # 用于捕获 PowerShell 的错误输出
 	    TIMEOUT 5
