@@ -10,20 +10,11 @@ Write-Host "arguments: $arguments"
 Write-Host "Current directory: $(Get-Location)"
 Write-Host "Files in directory: $(Get-ChildItem)"
 
-# 启动进程并获取进程对象
-$process = Start-Process -FilePath "$gmsslPath" `
-                         -ArgumentList $arguments `
-                         -NoNewWindow `
-                         -RedirectStandardOutput $logFile `
-                         -PassThru
-# 等待进程完成或超时
-$timeout = 3  # 设置超时时间，单位为秒
-$waitResult = $process.WaitForExit($timeout * 1000)  # 将超时时间转换为毫秒
-
-if (!$waitResult) {
-    Write-Host "Process did not complete within $timeout seconds. Terminating."
-    exit 0  # 返回一个非零值，表示超时错误
-} else {
-    Write-Host "Process completed successfully."
-    exit 1  # 返回零值，表示成功
-}
+# 启动进程并获取进程对象，但不等待退出
+Start-Process -FilePath "$gmsslPath" `
+              -ArgumentList $arguments `
+              -NoNewWindow `
+              -RedirectStandardOutput $logFile `
+              -PassThru `
+              -Wait:$false
+exit 0
