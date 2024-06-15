@@ -17,7 +17,7 @@ endif()
 
 if(WIN32)
 	execute_process(
-	    COMMAND powershell -ExecutionPolicy Bypass -File "../cmake/start_gmssl_tlcp.ps1"
+            COMMAND start /b powershell -ExecutionPolicy Bypass -File "../cmake/start_gmssl_tlcp.ps1"
 	    RESULT_VARIABLE SERVER_RESULT
 	    TIMEOUT 5
 	)
@@ -34,9 +34,8 @@ endif()
 execute_process(COMMAND ${CMAKE_COMMAND} -E sleep 2)
 
 if (WIN32)
-	message(STATUS "Client start!!!!!!!!!!!")
 	execute_process(
-		 COMMAND powershell -ExecutionPolicy Bypass -File "../cmake/start_gmssl_tlcp_client.ps1"
+		COMMAND powershell -ExecutionPolicy Bypass -File "../cmake/start_gmssl_tlcp_client.ps1"
 		RESULT_VARIABLE CLIENT_RESULT
 		TIMEOUT 5
 	)
@@ -47,7 +46,6 @@ else()
 		TIMEOUT 5
 	)
 endif()
- message(STATUS "Client started!!!!!!!!!!!")
 
 file(READ "tlcp_client.log" CLIENT_LOG_CONTENT)
 string(FIND "${CLIENT_LOG_CONTENT}" "Connection established" FOUND_INDEX)
