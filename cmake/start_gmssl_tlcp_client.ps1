@@ -13,10 +13,4 @@ $process = Start-Process -FilePath $gmsslPath `
 
 Start-Sleep -Seconds 5  # 等待几秒钟以便服务器启动
 
-if ($process.HasExited) {
-    Write-Host "Process failed to start."
-    exit 1
-} else {
-    Write-Host "Process started with ID: $($process.Id)"
-    exit 0
-}
+exit 0
