@@ -1,4 +1,3 @@
-
 if(NOT EXISTS rootcacert.pem)
 	message(FATAL_ERROR "file does not exist")
 endif()
@@ -17,9 +16,10 @@ endif()
 
 if(WIN32)
 	execute_process(
- 		COMMAND powershell -ExecutionPolicy Bypass -File "${CMAKE_SOURCE_DIR}/../cmake/start_gmssl_tlcp.ps1"
-	    	RESULT_VARIABLE SERVER_RESULT
-	    	TIMEOUT 5
+		COMMAND start /b powershell -ExecutionPolicy Bypass -File "../cmake/start_gmssl_tlcp.ps1"    
+		RESULT_VARIABLE SERVER_RESULT
+		ERROR_VARIABLE SERVER_ERROR  # 用于捕获 PowerShell 的错误输出
+	    TIMEOUT 5
 	)
  	if (SERVER_RESULT)
     		message(FATAL_ERROR "服务器启动失败${SERVER_RESULT}。错误信息: ${SERVER_ERROR}")
@@ -61,4 +61,3 @@ endif()
 execute_process(
 	COMMAND sudo pkill -f "gmssl"
 )
-
