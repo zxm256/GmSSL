@@ -16,8 +16,14 @@ $process = Start-Process -FilePath "$gmsslPath" `
                          -NoNewWindow `
                          -RedirectStandardOutput $logFile `
                          -PassThru
+# 等待进程完成或超时
+$timeout = 3  # 设置超时时间，单位为秒
+$waitResult = $process.WaitForExit($timeout * 1000)  # 将超时时间转换为毫秒
 
-Start-Sleep -Seconds 5  # 等待几秒钟以便服务器启动
-
-# 结束脚本
-exit 0
+if (!$waitResult) {
+    Write-Host "Process did not complete within $timeout seconds. Terminating."
+    exit 0  # 返回一个非零值，表示超时错误
+} else {
+    Write-Host "Process completed successfully."
+    exit 1  # 返回零值，表示成功
+}
