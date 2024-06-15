@@ -10,11 +10,11 @@ Write-Host "Current directory: $(Get-Location)"
 Write-Host "Files in directory: $(Get-ChildItem)"
 
 # 启动进程并获取进程对象
-$process = Start-Process -FilePath "$gmsslPath" `
-                         -ArgumentList $arguments `
-                         -NoNewWindow `
-                         #-RedirectStandardOutput $logFile `
-                         -PassThru
+#$process = Start-Process -FilePath "$gmsslPath" `
+#                         -ArgumentList $arguments `
+#                         -NoNewWindow `
+#                         #-RedirectStandardOutput $logFile `
+#                         -PassThru#
 
 Start-Sleep -Seconds 5  # 等待几秒钟以便服务器启动
 
