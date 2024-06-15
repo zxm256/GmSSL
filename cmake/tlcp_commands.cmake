@@ -15,7 +15,6 @@ if(NOT EXISTS enckey.pem)
 	message(FATAL_ERROR "file does not exist")
 endif()
 
-message(FATAL_ERROR "111server STARTTTING ")
 if(WIN32)
 	execute_process(
 	    COMMAND powershell -ExecutionPolicy Bypass -File "../cmake/start_gmssl_tlcp.ps1"
