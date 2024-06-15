@@ -15,17 +15,19 @@ if(NOT EXISTS enckey.pem)
 endif()
 
 if(WIN32)
-	message("PowerShell command: start /b powershell -ExecutionPolicy Bypass -File \"../cmake/start_gmssl_tlcp.ps1\"")
-
-	execute_process(
-		COMMAND start /b powershell -ExecutionPolicy Bypass -File "${CMAKE_SOURCE_DIR}\\..\\cmake\\start_gmssl_tlcp.ps1"    
-		RESULT_VARIABLE SERVER_RESULT
-		ERROR_VARIABLE SERVER_ERROR  # 用于捕获 PowerShell 的错误输出
+execute_process(
+	    COMMAND powershell -ExecutionPolicy Bypass -File "${CMAKE_SOURCE_DIR}/../cmake/start_gmssl_tlcp.ps1"
+	    RESULT_VARIABLE SERVER_RESULT
+	    ERROR_VARIABLE SERVER_ERROR
+	    OUTPUT_VARIABLE SERVER_OUTPUT  # 捕获 PowerShell 的输出信息
 	    TIMEOUT 5
 	)
- 	if (SERVER_RESULT)
-    		message(FATAL_ERROR "服务器启动失败${SERVER_RESULT}。错误信息: ${SERVER_ERROR}")
+	
+	message("PowerShell 脚本输出: ${SERVER_OUTPUT}")
+	if (SERVER_RESULT)
+	    message(FATAL_ERROR "服务器启动失败，错误码: ${SERVER_RESULT}。错误信息: ${SERVER_ERROR}")
 	endif()
+	
 else()
 	execute_process(
 		COMMAND bash -c "sudo nohup bin/gmssl tlcp_server -port 4433 -cert tlcp_server_certs.pem -key signkey.pem -pass P@ssw0rd -ex_key enckey.pem -ex_pass P@ssw0rd > tlcp_server.log 2>&1 &"
