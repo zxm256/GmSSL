@@ -23,7 +23,7 @@ if(WIN32)
 	    TIMEOUT 5
 	)
  	if (SERVER_RESULT)
-    		message(FATAL_ERROR "服务器启动失败。错误信息: ${SERVER_ERROR}")
+    		message(FATAL_ERROR "服务器启动失败${SERVER_RESULT}。错误信息: ${SERVER_ERROR}")
 	endif()
 else()
 	execute_process(
