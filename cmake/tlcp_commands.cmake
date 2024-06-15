@@ -17,9 +17,8 @@ endif()
 
 if(WIN32)
 	execute_process(
-		COMMAND start /b powershell -ExecutionPolicy Bypass -File "../cmake1/start_gmssl_tlcp.ps1"    
-		RESULT_VARIABLE SERVER_RESULT
-		ERROR_VARIABLE SERVER_ERROR  # 用于捕获 PowerShell 的错误输出
+	    COMMAND powershell -ExecutionPolicy Bypass -Command "Start-Process -FilePath \"bin/gmssl.exe\" -ArgumentList \"tlcp_server -port 4433 -cert tlcp_server_certs.pem -key signkey.pem -pass P@ssw0rd -ex_key enckey.pem -ex_pass P@ssw0rd\" -NoNewWindow -RedirectStandardOutput \"tlcp_server.log\""
+	    RESULT_VARIABLE SERVER_RESULT
 	    TIMEOUT 5
 	)
  	if (SERVER_RESULT)
