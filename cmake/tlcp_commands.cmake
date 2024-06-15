@@ -19,11 +19,8 @@ if(WIN32)
 	if(NOT EXISTS bin/gmssl.exe)
 		message(FATAL_ERROR "gmssl.exe file does not exist")
 	endif()
-	if(NOT EXISTS bin/gmssl)
-		message(FATAL_ERROR "gmssl file does not exist")
-	endif()
 	execute_process(
-		COMMAND cmd /c "start /B bin\\gmssl tlcp_server -port 4433 -cert tlcp_server_certs.pem -key signkey.pem -pass P@ssw0rd -ex_key enckey.pem -ex_pass P@ssw0rd > tlcp_server.log 2>&1"
+		COMMAND cmd /c "start /B bin\\gmssl.exe tlcp_server -port 4433 -cert tlcp_server_certs.pem -key signkey.pem -pass P@ssw0rd -ex_key enckey.pem -ex_pass P@ssw0rd > tlcp_server.log 2>&1"
 		RESULT_VARIABLE SERVER_RESULT
 		TIMEOUT 5
 	)
