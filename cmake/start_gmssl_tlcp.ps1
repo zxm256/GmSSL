@@ -8,7 +8,7 @@ param (
 $process = Start-Process -FilePath $gmsslPath `
                          -ArgumentList $arguments `
                          -NoNewWindow `
-                         #-RedirectStandardOutput $logFile `
+                         -RedirectStandardOutput $logFile `
                          -PassThru
 Start-Sleep -Seconds 5  # 等待几秒钟以便服务器启动
 exit 0
