@@ -15,6 +15,7 @@ if(NOT EXISTS enckey.pem)
 	message(FATAL_ERROR "file does not exist")
 endif()
 
+ message(STATUS "Server start!!!!!!!!!!!")
 if(WIN32)
 	if(NOT EXISTS bin/gmssl.exe)
 		message(FATAL_ERROR "gmssl.exe file does not exist")
@@ -35,14 +36,16 @@ else()
 		TIMEOUT 5
 	)
 endif()
+
+ message(STATUS "Server started!!!!!!!!!!!")
 if(NOT ${SERVER_RESULT} EQUAL 0)
 	message(FATAL_ERROR "server failed to start")
 endif()
 
 execute_process(COMMAND ${CMAKE_COMMAND} -E sleep 2)
 
-
 if (WIN32)
+	message(STATUS "Client start!!!!!!!!!!!")
 	execute_process(
 		COMMAND cmd /c "start /B bin\\gmssl tlcp_client -host localhost -port 4433 -cacert rootcacert.pem > tlcp_client.log 2>&1"
 		RESULT_VARIABLE CLIENT_RESULT
@@ -55,6 +58,7 @@ else()
 		TIMEOUT 5
 	)
 endif()
+ message(STATUS "Client started!!!!!!!!!!!")
 
 file(READ "tlcp_client.log" CLIENT_LOG_CONTENT)
 string(FIND "${CLIENT_LOG_CONTENT}" "Connection established" FOUND_INDEX)
