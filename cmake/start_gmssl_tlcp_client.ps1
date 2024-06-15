@@ -1,5 +1,5 @@
 param (
-    [string]$gmsslPath = "bin/gmssl.exe",
+    [string]$gmsslPath = "bin\\gmssl.exe",
     [string]$arguments = "tlcp_server -port 4433 -cert tlcp_server_certs.pem -key signkey.pem -pass P@ssw0rd -ex_key enckey.pem -ex_pass P@ssw0rd",
     [string]$logFile = "tlcp_server.log"
 )
