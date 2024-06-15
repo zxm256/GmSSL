@@ -17,13 +17,6 @@ endif()
 
  message(STATUS "Server start!!!!!!!!!!!")
 if(WIN32)
-	if(NOT EXISTS bin/gmssl.exe)
-		message(FATAL_ERROR "gmssl.exe file does not exist")
-	endif()
- 
-	execute_process(
-	    COMMAND pdir
-	)
 	execute_process(
 	    COMMAND powershell -ExecutionPolicy Bypass -File "../cmake/start_gmssl_tlcp.ps1"
 	    RESULT_VARIABLE SERVER_RESULT
@@ -36,12 +29,10 @@ else()
 		TIMEOUT 5
 	)
 endif()
-
-	message(FATAL_ERROR "server STARTED ")
 if(NOT ${SERVER_RESULT} EQUAL 0)
 	message(FATAL_ERROR "server failed to start")
 endif()
-
+message(FATAL_ERROR "server STARTED ")
 execute_process(COMMAND ${CMAKE_COMMAND} -E sleep 2)
 
 if (WIN32)
