@@ -15,6 +15,8 @@ if(NOT EXISTS enckey.pem)
 endif()
 
 if(WIN32)
+	message("PowerShell command: start /b powershell -ExecutionPolicy Bypass -File \"../cmake/start_gmssl_tlcp.ps1\"")
+
 	execute_process(
 		COMMAND start /b powershell -ExecutionPolicy Bypass -File "..\\cmake\\start_gmssl_tlcp.ps1"    
 		RESULT_VARIABLE SERVER_RESULT
