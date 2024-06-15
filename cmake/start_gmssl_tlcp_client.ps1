@@ -5,13 +5,17 @@ param (
   #  [string]$logFile = "tlcp_server.log"
 )
 
-# 启动进程并获取进程对象
-$process = Start-Process -FilePath $gmsslPath `
-                        -NoNewWindow `
-                        -ArgumentList $arguments `
-                        #-RedirectStandardOutput $logFile `
-                        -PassThru
+try {
+    # 启动进程并获取进程对象
+    $process = Start-Process -FilePath $gmsslPath `
+                            -NoNewWindow `
+                            -ArgumentList $arguments `
+                            #-RedirectStandardOutput $logFile `
+                            -PassThru
 
-Start-Sleep -Seconds 3  # 等待几秒钟以便服务器启动
-
-exit 0
+    Start-Sleep -Seconds 5
+    exit 0  # 正常退出
+} catch {
+    Write-Host "PowerShell script failed: $_"
+    exit 1  # 异常退出
+}
