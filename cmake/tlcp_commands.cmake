@@ -17,12 +17,14 @@ endif()
 
 if(WIN32)
 	execute_process(
-	    COMMAND start /b powershell -ExecutionPolicy Bypass -File "../cmake/start_gmssl_tlcp.ps1"
-	    RESULT_VARIABLE SERVER_RESULT
+		COMMAND start /b powershell -ExecutionPolicy Bypass -File "../cmake/start_gmssl_tlcp.ps1"    
+		RESULT_VARIABLE SERVER_RESULT
+		ERROR_VARIABLE SERVER_ERROR  # 用于捕获 PowerShell 的错误输出
 	    TIMEOUT 5
 	)
- 	
-	message(FATAL_ERROR "server failed to start ${SERVER_RESULT}")
+ 	if (SERVER_RESULT)
+    		message(FATAL_ERROR "服务器启动失败。错误信息: ${SERVER_ERROR}")
+	endif()
 else()
 	execute_process(
 		COMMAND bash -c "sudo nohup bin/gmssl tlcp_server -port 4433 -cert tlcp_server_certs.pem -key signkey.pem -pass P@ssw0rd -ex_key enckey.pem -ex_pass P@ssw0rd > tlcp_server.log 2>&1 &"
