@@ -17,7 +17,7 @@ endif()
 
 if(WIN32)
 	execute_process(
- 		COMMAND powershell -ExecutionPolicy Bypass -File "${CMAKE_SOURCE_DIR}/cmake/start_gmssl_tlcp.ps1"
+ 		COMMAND powershell -ExecutionPolicy Bypass -File "${CMAKE_SOURCE_DIR}/../cmake/start_gmssl_tlcp.ps1"
 	    	RESULT_VARIABLE SERVER_RESULT
 	    	TIMEOUT 5
 	)
