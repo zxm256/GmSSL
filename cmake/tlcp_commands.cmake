@@ -37,7 +37,7 @@ else()
 	)
 endif()
 
- message(STATUS "Server started!!!!!!!!!!!")
+	message(FATAL_ERROR "server STARTED ")
 if(NOT ${SERVER_RESULT} EQUAL 0)
 	message(FATAL_ERROR "server failed to start")
 endif()
